@@ -9,7 +9,7 @@ Usage:
 """
 
 import mlbstatsapi
-from datetime import date, timedelta, datetime
+from datetime import date, timedelta, datetime, timezone
 
 NL_EAST_TEAMS = [144, 143, 146, 120, 121]  # ATL PHI MIA WSH NYM
 BRAVES_ID     = 144
@@ -133,6 +133,15 @@ def get_todays_game(team_id):
             except Exception:
                 pass
 
+            time_et = ""
+            try:
+                raw = getattr(g, "game_date", None) or getattr(g, "game_datetime", None)
+                if raw:
+                    dt_et = datetime.fromisoformat(raw.replace("Z", "+00:00")).astimezone(EDT)
+                    time_et = dt_et.strftime("%-I:%M %p ET")
+            except Exception:
+                pass
+
             return {
                 "team_id":        team_id,
                 "team_abbr":      team_abbr,
@@ -153,6 +162,7 @@ def get_todays_game(team_id):
                 "on_first":       on_first,
                 "on_second":      on_second,
                 "on_third":       on_third,
+                "time_et":        time_et,
             }
     return None
 
@@ -170,11 +180,17 @@ def get_roster_stats():
 
         if pos_type == 'Pitcher':
             try:
-                s = mlb.get_player_stats(pid, stats=['season'], groups=['pitching'])
+                s = mlb.get_player_stats(pid, stats=['season'], groups=['pitching', 'fielding'])
                 st = s['pitching']['season'].splits[0].stat
                 ip  = float(st.innings_pitched or 0)
                 k9  = float(st.strikeouts_per_9_inn or 0)
                 ks  = round(k9 * ip / 9) if ip else 0
+                errors = 0
+                try:
+                    for split in s['fielding']['season'].splits:
+                        errors += int(split.stat.errors or 0)
+                except Exception:
+                    pass
                 pitchers.append({
                     "name": name,
                     "era":  st.era   or "-",
@@ -184,13 +200,20 @@ def get_roster_stats():
                     "k":    ks,
                     "bb":   st.base_on_balls or 0,
                     "whip": st.whip or "-",
+                    "e":    errors,
                 })
             except Exception:
-                pitchers.append({"name": name, "era": "-", "w": 0, "l": 0, "ip": "-", "k": 0, "bb": 0, "whip": "-"})
+                pitchers.append({"name": name, "era": "-", "w": 0, "l": 0, "ip": "-", "k": 0, "bb": 0, "whip": "-", "e": 0})
         else:
             try:
-                s = mlb.get_player_stats(pid, stats=['season'], groups=['hitting'])
+                s = mlb.get_player_stats(pid, stats=['season'], groups=['hitting', 'fielding'])
                 st = s['hitting']['season'].splits[0].stat
+                errors = 0
+                try:
+                    for split in s['fielding']['season'].splits:
+                        errors += int(split.stat.errors or 0)
+                except Exception:
+                    pass
                 hitters.append({
                     "name": name,
                     "pos":  pos_abbr or pos_type[:2],
@@ -198,11 +221,13 @@ def get_roster_stats():
                     "hr":   st.home_runs or 0,
                     "rbi":  st.rbi  or 0,
                     "r":    st.runs or 0,
+                    "bb":   st.base_on_balls or 0,
                     "ops":  st.ops  or "-",
                     "sb":   st.stolen_bases or 0,
+                    "e":    errors,
                 })
             except Exception:
-                hitters.append({"name": name, "pos": pos_abbr, "avg": "-", "hr": 0, "rbi": 0, "r": 0, "ops": "-", "sb": 0})
+                hitters.append({"name": name, "pos": pos_abbr, "avg": "-", "hr": 0, "rbi": 0, "r": 0, "bb": 0, "ops": "-", "sb": 0, "e": 0})
 
     hitters.sort(key=lambda x: float(x['ops'])  if str(x['ops'])  not in ('-', '') else 0, reverse=True)
     pitchers.sort(key=lambda x: float(x['era'])  if str(x['era'])  not in ('-', '') else 99)
@@ -268,7 +293,9 @@ def render_game_card(game):
     inning = game["inning_info"]
 
     if state == "Preview":
-        status_badge = '<span class="badge badge-upcoming">Upcoming</span>'
+        time_str = game.get("time_et", "")
+        time_display = f'<span class="game-time">{time_str}</span>' if time_str else ""
+        status_badge = f'<span class="badge badge-upcoming">Upcoming</span>{time_display}'
         score_html = f'''
             <div class="score-row">
                 <span class="team-abbr">{away_label}</span>
@@ -351,6 +378,12 @@ def render_no_game_card(team_abbr):
 # ---------------------------------------------------------------------------
 # Section renderers
 # ---------------------------------------------------------------------------
+
+EDT = timezone(timedelta(hours=-4))
+
+NL_EAST_SET = set(NL_EAST_TEAMS)
+
+
 
 def render_standings(standings):
     rows = ""
@@ -435,8 +468,10 @@ def render_roster(hitters, pitchers):
             <td class="stat-num">{h["hr"]}</td>
             <td class="stat-num">{h["rbi"]}</td>
             <td class="stat-num">{h["r"]}</td>
+            <td class="stat-num">{h["bb"]}</td>
             <td class="stat-num">{h["ops"]}</td>
             <td class="stat-num">{h["sb"]}</td>
+            <td class="stat-num">{h["e"]}</td>
         </tr>'''
 
     pitcher_rows = ""
@@ -451,6 +486,7 @@ def render_roster(hitters, pitchers):
             <td class="stat-num">{p["k"]}</td>
             <td class="stat-num">{p["bb"]}</td>
             <td class="stat-num">{p["whip"]}</td>
+            <td class="stat-num">{p["e"]}</td>
         </tr>'''
 
     return f'''
@@ -460,7 +496,7 @@ def render_roster(hitters, pitchers):
             <table class="roster-table">
                 <thead><tr>
                     <th class="player-name">Player</th><th>Pos</th>
-                    <th>AVG</th><th>HR</th><th>RBI</th><th>R</th><th>OPS</th><th>SB</th>
+                    <th>AVG</th><th>HR</th><th>RBI</th><th>R</th><th>BB</th><th>OPS</th><th>SB</th><th>E</th>
                 </tr></thead>
                 <tbody>{hitter_rows}</tbody>
             </table>
@@ -472,7 +508,7 @@ def render_roster(hitters, pitchers):
             <table class="roster-table">
                 <thead><tr>
                     <th class="player-name">Player</th>
-                    <th>ERA</th><th>W-L</th><th>IP</th><th>K</th><th>BB</th><th>WHIP</th>
+                    <th>ERA</th><th>W-L</th><th>IP</th><th>K</th><th>BB</th><th>WHIP</th><th>E</th>
                 </tr></thead>
                 <tbody>{pitcher_rows}</tbody>
             </table>
@@ -586,10 +622,10 @@ def build_html(games_by_abbr, standings, recent_games, hitters, pitchers, update
         display = "block" if abbr == "ATL" else "none"
         cards_html += f'<div id="card-{abbr}" class="game-card" style="display:{display}">{inner}</div>\n'
 
-    standings_html = render_standings(standings)
-    recent_html    = render_recent_games(recent_games)
-    roster_html    = render_roster(hitters, pitchers)
-    unicorn_html   = _render_unicorn_tab()
+    standings_html  = render_standings(standings)
+    recent_html     = render_recent_games(recent_games)
+    roster_html     = render_roster(hitters, pitchers)
+    unicorn_html    = _render_unicorn_tab()
 
     has_live_game_js = "true" if any(
         g and g.get("abstract_state") == "Live" for g in games_by_abbr.values()
@@ -683,6 +719,7 @@ def build_html(games_by_abbr, standings, recent_games, hitters, pitchers, update
         .badge-live {{ background: var(--red); color: var(--white); }}
         .badge-delay {{ background: #F59E0B; color: #1A1A00; margin-left: 6px; }}
         .badge-upcoming {{ background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.8); }}
+        .game-time {{ margin-left: 8px; font-size: 0.85rem; font-weight: 700; color: var(--gold); }}
         .result-win {{ background: #16A34A; color: var(--white); }}
         .result-loss {{ background: var(--red); color: var(--white); }}
         /* Sections */
@@ -705,7 +742,7 @@ def build_html(games_by_abbr, standings, recent_games, hitters, pitchers, update
         tr[data-team]:focus {{ outline: 2px solid var(--navy); outline-offset: -2px; }}
         tr.standings-active td {{ background: #c8daF8 !important; }}
         tr.standings-active .team-name {{ color: var(--navy); font-weight: 800; }}
-        .game-date {{ color: var(--muted); font-size: 0.82rem; white-space: nowrap; }}
+.game-date {{ color: var(--muted); font-size: 0.82rem; white-space: nowrap; }}
         .score-cell {{ font-weight: 700; }}
         .game-state-label {{ color: var(--muted); font-size: 0.82rem; }}
         footer {{ text-align: center; padding: 16px; font-size: 0.78rem; color: var(--muted); }}
