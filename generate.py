@@ -481,6 +481,100 @@ def render_roster(hitters, pitchers):
 
 
 # ---------------------------------------------------------------------------
+# Unicorn tab (not an f-string — no brace escaping needed for CSS/JS)
+# ---------------------------------------------------------------------------
+
+def _render_unicorn_tab():
+    return '''<style>
+.unicorn-stage { position:relative; display:flex; flex-direction:column; align-items:center;
+  justify-content:center; min-height:520px; border-radius:14px; overflow:hidden;
+  background:radial-gradient(ellipse at 50% 60%,#FFF0F8,#F3E8FF 48%,#EDE9FE 72%,#DBEAFE);
+  padding:48px 20px 36px; }
+.sparkle-canvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+.unicorn-dancer { animation:u-bounce .85s cubic-bezier(.45,.05,.55,.95) infinite alternate;
+  position:relative; z-index:2; }
+@keyframes u-bounce { from{transform:translateY(0) rotate(-4deg)} to{transform:translateY(-26px) rotate(4deg)} }
+#u-horn { animation:horn-glow 1.8s ease-in-out infinite alternate; }
+@keyframes horn-glow {
+  from{filter:drop-shadow(0 0 4px #FFD700)}
+  to{filter:drop-shadow(0 0 14px #FFD700) drop-shadow(0 0 28px #FFF0A0)} }
+#leg-fl,#leg-br { transform-box:fill-box; transform-origin:50% 0%;
+  animation:leg-a .44s ease-in-out infinite alternate; }
+#leg-fr,#leg-bl { transform-box:fill-box; transform-origin:50% 0%;
+  animation:leg-b .44s ease-in-out infinite alternate; }
+@keyframes leg-a { from{transform:rotate(-20deg)} to{transform:rotate(14deg)} }
+@keyframes leg-b { from{transform:rotate(14deg)} to{transform:rotate(-20deg)} }
+.unicorn-svg { display:block; filter:drop-shadow(0 10px 28px rgba(155,77,202,.3)); }
+.unicorn-song { position:relative; z-index:2; font-size:1.05rem; font-weight:800;
+  letter-spacing:.02em; text-align:center; margin-top:14px;
+  background:linear-gradient(90deg,#FF6B9D,#C084FC,#60A5FA,#4ADE80,#FBBF24,#FF6B9D);
+  background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text; animation:rainbow-shift 3s linear infinite; }
+@keyframes rainbow-shift { to{background-position:200% center} }
+.unicorn-hearts { position:relative; z-index:2; margin-top:10px; font-size:1.5rem;
+  letter-spacing:.5em; animation:hearts-pulse 1.2s ease-in-out infinite alternate; }
+@keyframes hearts-pulse { from{transform:scale(1)} to{transform:scale(1.18)} }
+</style>
+<div class="unicorn-stage">
+  <svg aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;opacity:.22;pointer-events:none;"
+       viewBox="0 0 600 340" preserveAspectRatio="xMidYMid slice">
+    <path d="M-30,320 Q300,-60 630,320" stroke="#EF4444" stroke-width="28" fill="none"/>
+    <path d="M-30,320 Q300,-34 630,320" stroke="#F97316" stroke-width="22" fill="none"/>
+    <path d="M-30,320 Q300,-10 630,320" stroke="#EAB308" stroke-width="18" fill="none"/>
+    <path d="M-30,320 Q300,14 630,320"  stroke="#22C55E" stroke-width="16" fill="none"/>
+    <path d="M-30,320 Q300,36 630,320"  stroke="#3B82F6" stroke-width="14" fill="none"/>
+    <path d="M-30,320 Q300,58 630,320"  stroke="#8B5CF6" stroke-width="12" fill="none"/>
+  </svg>
+  <canvas class="sparkle-canvas" id="sparkle-canvas"></canvas>
+  <div class="unicorn-dancer">
+    <svg class="unicorn-svg" viewBox="0 0 320 300" width="320" height="300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="ug-body" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FFE4F3"/>
+          <stop offset="100%" stop-color="#FFC2E0"/>
+        </linearGradient>
+        <linearGradient id="ug-horn" x1="0%" y1="100%" x2="50%" y2="0%">
+          <stop offset="0%" stop-color="#F59E0B"/>
+          <stop offset="100%" stop-color="#FEF9C3"/>
+        </linearGradient>
+      </defs>
+      <path d="M244,158 C278,130 286,162 280,190 C274,218 254,236 238,246" stroke="#FF6B9D" stroke-width="11" fill="none" stroke-linecap="round"/>
+      <path d="M244,165 C280,142 287,172 280,200 C272,226 252,242 234,250" stroke="#C084FC" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <path d="M244,172 C280,154 286,180 278,208 C269,233 248,246 230,254" stroke="#60A5FA" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="174" cy="168" rx="70" ry="45" fill="url(#ug-body)"/>
+      <ellipse cx="122" cy="138" rx="26" ry="36" fill="url(#ug-body)" transform="rotate(-22,122,138)"/>
+      <rect id="leg-bl" x="182" y="208" width="16" height="52" rx="8" fill="#FFC2E0"/>
+      <rect id="leg-br" x="206" y="208" width="16" height="50" rx="8" fill="#FFC2E0"/>
+      <rect id="leg-fl" x="122" y="205" width="16" height="54" rx="8" fill="#FFE4F3"/>
+      <rect id="leg-fr" x="146" y="207" width="16" height="52" rx="8" fill="#FFE4F3"/>
+      <circle cx="91" cy="101" r="36" fill="url(#ug-body)"/>
+      <polygon points="115,74 124,52 109,62" fill="#FFE4F3"/>
+      <polygon points="115,73 121,57 110,64" fill="#FF9EC4"/>
+      <polygon id="u-horn" points="91,67 75,26 100,32" fill="url(#ug-horn)"/>
+      <path d="M87,63 Q81,50 78,36" stroke="rgba(255,255,255,0.65)" stroke-width="1.5" fill="none"/>
+      <path d="M106,67 C118,87 128,114 134,148" stroke="#FF6B9D" stroke-width="9" fill="none" stroke-linecap="round"/>
+      <path d="M102,68 C114,88 124,115 130,149" stroke="#C084FC" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <path d="M98,70 C111,89 120,116 126,150" stroke="#60A5FA" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M95,72 C108,91 117,117 123,151" stroke="#4ADE80" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <ellipse cx="78" cy="97" rx="13" ry="12" fill="white"/>
+      <circle cx="77" cy="97" r="9" fill="#7C3AED"/>
+      <circle cx="77" cy="97" r="5" fill="#1a0033"/>
+      <circle cx="73" cy="93" r="3" fill="white"/>
+      <circle cx="81" cy="94" r="1.8" fill="white"/>
+      <line x1="68" y1="88" x2="64" y2="82" stroke="#2d0060" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="76" y1="85" x2="74" y2="79" stroke="#2d0060" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="84" y1="87" x2="85" y2="81" stroke="#2d0060" stroke-width="1.8" stroke-linecap="round"/>
+      <ellipse cx="65" cy="114" rx="5" ry="4" fill="#FF9EC4" opacity="0.9"/>
+      <ellipse cx="65" cy="108" rx="12" ry="8" fill="#FF6B9D" opacity="0.32"/>
+      <path d="M63,123 Q72,131 82,123" stroke="#CC5588" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <p class="unicorn-song">&#9834; Pink Fluffy Unicorns Dancing on Rainbows &#9834;</p>
+  <div class="unicorn-hearts">&#128151; &#128156; &#128153; &#128154; &#128155;</div>
+</div>'''
+
+
+# ---------------------------------------------------------------------------
 # HTML builder
 # ---------------------------------------------------------------------------
 
@@ -495,6 +589,7 @@ def build_html(games_by_abbr, standings, recent_games, hitters, pitchers, update
     standings_html = render_standings(standings)
     recent_html    = render_recent_games(recent_games)
     roster_html    = render_roster(hitters, pitchers)
+    unicorn_html   = _render_unicorn_tab()
 
     has_live_game_js = "true" if any(
         g and g.get("abstract_state") == "Live" for g in games_by_abbr.values()
@@ -653,6 +748,7 @@ def build_html(games_by_abbr, standings, recent_games, hitters, pitchers, update
     <nav class="tab-bar">
         <button class="tab-btn active" onclick="showTab('scores', this)">Scores</button>
         <button class="tab-btn"        onclick="showTab('roster', this)">Roster &amp; Stats</button>
+        <button class="tab-btn"        onclick="showTab('unicorn', this)">🦄 For Sis</button>
     </nav>
     <main>
         <div id="tab-scores" class="tab-panel active">
@@ -665,6 +761,9 @@ def build_html(games_by_abbr, standings, recent_games, hitters, pitchers, update
         <div id="tab-roster" class="tab-panel">
             {roster_html}
         </div>
+        <div id="tab-unicorn" class="tab-panel">
+            {unicorn_html}
+        </div>
     </main>
     <footer>Last updated: {updated_at} &nbsp;·&nbsp; Data via MLB Stats API</footer>
     <script>
@@ -674,6 +773,42 @@ def build_html(games_by_abbr, standings, recent_games, hitters, pitchers, update
             document.querySelectorAll('.tab-btn').forEach(function(el) {{ el.classList.remove('active'); }});
             btn.classList.add('active');
         }}
+        (function() {{
+            var canvas = document.getElementById('sparkle-canvas');
+            if (!canvas) return;
+            var ctx = canvas.getContext('2d');
+            var particles = [];
+            var COLORS = ['#FF6B9D','#C084FC','#60A5FA','#4ADE80','#FBBF24','#FFC2E0','#fff'];
+            function resize() {{ canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }}
+            window.addEventListener('resize', resize); resize();
+            function spawn() {{
+                particles.push({{ x: Math.random()*canvas.width, y: canvas.height+10,
+                    vx: (Math.random()-.5)*1.4, vy: -(Math.random()*2.2+0.8),
+                    r: Math.random()*6+2, alpha: 1,
+                    color: COLORS[Math.floor(Math.random()*COLORS.length)],
+                    isStar: Math.random()>.45 }});
+            }}
+            function drawStar(x,y,r,a,color) {{
+                ctx.save(); ctx.globalAlpha=a; ctx.fillStyle=color;
+                ctx.translate(x,y); ctx.rotate(a*3); ctx.beginPath();
+                for (var i=0;i<5;i++) {{ var ang=(i*4*Math.PI/5)-Math.PI/2;
+                    i===0?ctx.moveTo(Math.cos(ang)*r,Math.sin(ang)*r):ctx.lineTo(Math.cos(ang)*r,Math.sin(ang)*r); }}
+                ctx.closePath(); ctx.fill(); ctx.restore();
+            }}
+            function tick() {{
+                if (!document.getElementById('tab-unicorn').classList.contains('active')) {{ requestAnimationFrame(tick); return; }}
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                if (Math.random()<.18) spawn();
+                for (var i=particles.length-1;i>=0;i--) {{
+                    var p=particles[i]; p.x+=p.vx; p.y+=p.vy; p.alpha-=.007;
+                    if (p.alpha<=0||p.y<-20) {{ particles.splice(i,1); continue; }}
+                    if (p.isStar) drawStar(p.x,p.y,p.r,p.alpha,p.color);
+                    else {{ ctx.globalAlpha=p.alpha; ctx.fillStyle=p.color; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill(); }}
+                }}
+                requestAnimationFrame(tick);
+            }}
+            tick();
+        }})();
     </script>
     <script>
         function showTeam(abbr) {{
