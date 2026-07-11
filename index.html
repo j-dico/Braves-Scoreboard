@@ -32,18 +32,8 @@
             gap: 16px;
         }
         .logo { font-size: 2.4rem; }
-        .header-text h1 {
-            color: var(--white);
-            font-size: 1.6rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-        }
-        .header-text p {
-            color: var(--gold);
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-top: 2px;
-        }
+        .header-text h1 { color: var(--white); font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; }
+        .header-text p  { color: var(--gold);  font-size: 0.85rem; font-weight: 600; margin-top: 2px; }
         main {
             max-width: 760px;
             margin: 0 auto;
@@ -59,6 +49,7 @@
             padding: 24px;
             color: var(--white);
             box-shadow: 0 4px 20px rgba(19,39,79,0.25);
+            transition: opacity .15s;
         }
         .game-card-header {
             display: flex;
@@ -66,189 +57,87 @@
             justify-content: space-between;
             margin-bottom: 16px;
         }
-        .game-card-title {
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: rgba(255,255,255,0.6);
-        }
-        .score-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            margin: 8px 0;
-        }
-        .team-abbr {
-            font-size: 1.6rem;
-            font-weight: 900;
-            letter-spacing: 0.04em;
-        }
-        .score-num {
-            font-size: 3.8rem;
-            font-weight: 900;
-            line-height: 1;
-            color: var(--gold);
-        }
-        .score-dash {
-            font-size: 2rem;
-            color: rgba(255,255,255,0.4);
-            font-weight: 300;
-        }
-        .inning-info {
-            text-align: center;
-            font-size: 1rem;
-            color: rgba(255,255,255,0.7);
-            margin-top: 8px;
-            font-weight: 600;
-        }
-        .count-row {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 14px;
-        }
-        .count-group {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .count-label {
-            font-size: 0.7rem;
-            font-weight: 800;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.45);
-            width: 12px;
-        }
-        .count-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
+        .game-card-title { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.6); }
+        .score-row { display: flex; align-items: center; justify-content: center; gap: 16px; margin: 8px 0; }
+        .team-abbr { font-size: 1.6rem; font-weight: 900; letter-spacing: 0.04em; }
+        .score-num { font-size: 3.8rem; font-weight: 900; line-height: 1; color: var(--gold); }
+        .score-featured { color: #FFFFFF; }
+        .score-opp      { color: var(--gold); }
+        .score-dash { font-size: 2rem; color: rgba(255,255,255,0.4); font-weight: 300; }
+        .inning-info { text-align: center; font-size: 1rem; color: rgba(255,255,255,0.7); margin-top: 8px; font-weight: 600; }
+        .count-row { display: flex; justify-content: center; gap: 20px; margin-top: 14px; }
+        .count-group { display: flex; align-items: center; gap: 6px; }
+        .count-label { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45); width: 12px; }
+        .count-dot { width: 12px; height: 12px; border-radius: 50%; }
         .dot-ball { background: #22C55E; }
         .dot-strike { background: #EF4444; }
         .dot-out { background: #F59E0B; }
         .dot-empty { background: rgba(255,255,255,0.15); }
-        .situation-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 16px;
-            padding-top: 14px;
-            border-top: 1px solid rgba(255,255,255,0.08);
-        }
-        .situation-info {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .sit-item {
-            display: flex;
-            flex-direction: column;
-            gap: 1px;
-        }
-        .sit-label {
-            font-size: 0.62rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.4);
-        }
-        .sit-name {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: rgba(255,255,255,0.9);
-        }
-        .game-detail {
-            text-align: center;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.6);
-            margin-top: 6px;
-        }
-        .game-location {
-            text-align: center;
-            font-size: 0.82rem;
-            color: rgba(255,255,255,0.5);
-            margin-top: 12px;
-        }
-        .no-game {
-            text-align: center;
-            font-size: 1.2rem;
-            padding: 16px 0;
-            color: rgba(255,255,255,0.7);
-        }
+        .situation-row { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08); }
+        .situation-info { display: flex; flex-direction: column; gap: 8px; }
+        .sit-item { display: flex; flex-direction: column; gap: 1px; }
+        .sit-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+        .sit-name { font-size: 0.9rem; font-weight: 700; color: rgba(255,255,255,0.9); }
+        .game-detail { text-align: center; font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-top: 6px; }
+        .game-location { text-align: center; font-size: 0.82rem; color: rgba(255,255,255,0.5); margin-top: 12px; }
+        .no-game { text-align: center; font-size: 1.2rem; padding: 16px 0; color: rgba(255,255,255,0.7); }
         /* Badges */
-        .badge {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 0.72rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-        }
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; }
         .badge-live { background: var(--red); color: var(--white); }
         .badge-delay { background: #F59E0B; color: #1A1A00; margin-left: 6px; }
         .badge-upcoming { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.8); }
         .result-win { background: #16A34A; color: var(--white); }
         .result-loss { background: var(--red); color: var(--white); }
         /* Sections */
-        .section {
-            background: var(--card-bg);
-            border-radius: 14px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
-        .section-title {
-            font-size: 1rem;
-            font-weight: 800;
-            color: var(--navy);
-            margin-bottom: 14px;
-            letter-spacing: -0.01em;
-        }
+        .section { background: var(--card-bg); border-radius: 14px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .section-title { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 14px; letter-spacing: -0.01em; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .standings-hint { font-size: 0.72rem; font-weight: 500; color: var(--muted); letter-spacing: 0; }
         /* Tables */
         .table-wrap { overflow-x: auto; }
-        .standings-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
-        }
-        .standings-table th {
-            text-align: left;
-            padding: 8px 10px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--muted);
-            border-bottom: 2px solid var(--border);
-        }
-        .standings-table td {
-            padding: 10px 10px;
-            border-bottom: 1px solid var(--border);
-            color: var(--text);
-        }
+        .standings-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .standings-table th { text-align: left; padding: 8px 10px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); border-bottom: 2px solid var(--border); }
+        .standings-table td { padding: 10px 10px; border-bottom: 1px solid var(--border); color: var(--text); }
         .standings-table tr:last-child td { border-bottom: none; }
         .standings-table .team-name { font-weight: 600; min-width: 160px; }
         .standings-table .rank { color: var(--muted); width: 28px; }
-        .standings-braves td {
-            background: var(--braves-row);
-            font-weight: 700;
-        }
+        .standings-braves td { background: var(--braves-row); font-weight: 700; }
         .standings-braves .team-name { color: var(--navy); }
+        /* Clickable rows */
+        tr[data-team] { cursor: pointer; transition: background .12s; }
+        tr[data-team]:hover td { background: #dde8f8; }
+        tr[data-team]:focus { outline: 2px solid var(--navy); outline-offset: -2px; }
+        tr.standings-active td { background: #c8daF8 !important; }
+        tr.standings-active .team-name { color: var(--navy); font-weight: 800; }
         .game-date { color: var(--muted); font-size: 0.82rem; white-space: nowrap; }
         .score-cell { font-weight: 700; }
         .game-state-label { color: var(--muted); font-size: 0.82rem; }
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 16px;
-            font-size: 0.78rem;
-            color: var(--muted);
+        footer { text-align: center; padding: 16px; font-size: 0.78rem; color: var(--muted); }
+        /* Tabs */
+        .tab-bar { background: var(--navy); padding: 0 24px; display: flex; gap: 4px; }
+        .tab-btn {
+            background: none; border: none; cursor: pointer;
+            color: rgba(255,255,255,0.5); font-size: 0.85rem; font-weight: 700;
+            padding: 12px 16px; border-bottom: 3px solid transparent;
+            transition: color .15s, border-color .15s;
         }
+        .tab-btn:hover { color: rgba(255,255,255,0.8); }
+        .tab-btn.active { color: #fff; border-bottom-color: var(--red); }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: flex; flex-direction: column; gap: 24px; }
+        /* Roster tables */
+        .roster-section { background: var(--card-bg); border-radius: 14px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .roster-title { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 14px; }
+        .roster-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .roster-table th { text-align: right; padding: 6px 10px 10px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); border-bottom: 2px solid var(--border); white-space: nowrap; }
+        .roster-table th.player-name { text-align: left; min-width: 140px; }
+        .roster-table td { padding: 10px 10px; border-bottom: 1px solid var(--border); }
+        .roster-table tr:last-child td { border-bottom: none; }
+        .roster-table tr:hover td { background: #f0f4fb; }
+        .player-name { font-weight: 600; text-align: left; }
+        .pos-badge-cell { text-align: left; }
+        .pos-badge { display: inline-block; background: var(--braves-row); color: var(--navy); font-size: 0.65rem; font-weight: 800; letter-spacing: 0.06em; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; }
+        .stat-num { text-align: right; font-variant-numeric: tabular-nums; color: var(--text); }
+        .stat-num.era { font-weight: 700; color: var(--navy); }
     </style>
 </head>
 <body>
@@ -259,39 +148,32 @@
             <p>2026 Season Tracker</p>
         </div>
     </header>
+    <nav class="tab-bar">
+        <button class="tab-btn active" onclick="showTab('scores', this)">Scores</button>
+        <button class="tab-btn"        onclick="showTab('roster', this)">Roster &amp; Stats</button>
+    </nav>
     <main>
-        
-    <div class="game-card">
+        <div id="tab-scores" class="tab-panel active">
+            <div id="game-cards">
+<div id="card-ATL" class="game-card" style="display:block">
         <div class="game-card-header">
-            <span class="game-card-title">Today's Game</span>
+            <span class="game-card-title">ATL — Today's Game</span>
             <span class="badge badge-live">LIVE <span class="badge badge-delay">Rain Delay</span></span>
         </div>
         
             <div class="score-row">
                 <span class="team-abbr">ATL</span>
-                <span class="score-num">0</span>
+                <span class="score-num score-featured">0</span>
                 <span class="score-dash">–</span>
-                <span class="score-num">0</span>
+                <span class="score-num score-opp">0</span>
                 <span class="team-abbr">STL</span>
             </div>
             <div class="inning-info">Top 4</div>
-            
             <div class="count-row">
-                <div class="count-group">
-                    <span class="count-label">B</span>
-                    <span class="count-dot dot-ball"></span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span>
-                </div>
-                <div class="count-group">
-                    <span class="count-label">S</span>
-                    <span class="count-dot dot-strike"></span><span class="count-dot dot-strike"></span><span class="count-dot dot-empty"></span>
-                </div>
-                <div class="count-group">
-                    <span class="count-label">O</span>
-                    <span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span>
-                </div>
+                <div class="count-group"><span class="count-label">B</span><span class="count-dot dot-ball"></span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span></div>
+                <div class="count-group"><span class="count-label">S</span><span class="count-dot dot-strike"></span><span class="count-dot dot-strike"></span><span class="count-dot dot-empty"></span></div>
+                <div class="count-group"><span class="count-label">O</span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span></div>
             </div>
-            
-            
             <div class="situation-row">
                 <div class="diamond-wrap"><svg viewBox="0 0 100 100" width="72" height="72" aria-hidden="true">
   <polygon points="50,12 88,50 50,88 12,50" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
@@ -302,30 +184,112 @@
 </svg></div>
                 <div class="situation-info"><div class="sit-item"><span class="sit-label">At Bat</span><span class="sit-name">Ozzie Albies</span></div><div class="sit-item"><span class="sit-label">Pitching</span><span class="sit-name">Kyle Leahy</span></div></div>
             </div>
+        <div class="game-location">✈️ Busch Stadium</div></div>
+<div id="card-PHI" class="game-card" style="display:none">
+        <div class="game-card-header">
+            <span class="game-card-title">PHI — Today's Game</span>
+            <span class="badge result-loss">L</span>
+        </div>
+        
+            <div class="score-row">
+                <span class="team-abbr">PHI</span>
+                <span class="score-num score-featured">2</span>
+                <span class="score-dash">–</span>
+                <span class="score-num score-opp">10</span>
+                <span class="team-abbr">DET</span>
+            </div>
+            <div class="game-detail">Final</div>
+        <div class="game-location">✈️ Comerica Park</div></div>
+<div id="card-MIA" class="game-card" style="display:none">
+        <div class="game-card-header">
+            <span class="game-card-title">MIA — Today's Game</span>
+            <span class="badge result-loss">L</span>
+        </div>
+        
+            <div class="score-row">
+                <span class="team-abbr">CLE</span>
+                <span class="score-num score-opp">3</span>
+                <span class="score-dash">–</span>
+                <span class="score-num score-featured">2</span>
+                <span class="team-abbr">MIA</span>
+            </div>
+            <div class="game-detail">Final</div>
+        <div class="game-location">🏠 loanDepot park</div></div>
+<div id="card-WSH" class="game-card" style="display:none">
+        <div class="game-card-header">
+            <span class="game-card-title">WSH — Today's Game</span>
+            <span class="badge badge-live">LIVE</span>
+        </div>
+        
+            <div class="score-row">
+                <span class="team-abbr">NYY</span>
+                <span class="score-num score-opp">2</span>
+                <span class="score-dash">–</span>
+                <span class="score-num score-featured">1</span>
+                <span class="team-abbr">WSH</span>
+            </div>
+            <div class="inning-info">Top 7</div>
+            <div class="count-row">
+                <div class="count-group"><span class="count-label">B</span><span class="count-dot dot-ball"></span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span></div>
+                <div class="count-group"><span class="count-label">S</span><span class="count-dot dot-strike"></span><span class="count-dot dot-strike"></span><span class="count-dot dot-empty"></span></div>
+                <div class="count-group"><span class="count-label">O</span><span class="count-dot dot-out"></span><span class="count-dot dot-out"></span><span class="count-dot dot-out"></span></div>
+            </div>
+            <div class="situation-row">
+                <div class="diamond-wrap"><svg viewBox="0 0 100 100" width="72" height="72" aria-hidden="true">
+  <polygon points="50,12 88,50 50,88 12,50" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+  <rect x="43" y="5"  width="14" height="14" rx="2" transform="rotate(45,50,12)" fill="rgba(255,255,255,0.15)"/>
+  <rect x="81" y="43" width="14" height="14" rx="2" transform="rotate(45,88,50)" fill="rgba(255,255,255,0.15)"/>
+  <rect x="5"  y="43" width="14" height="14" rx="2" transform="rotate(45,12,50)" fill="rgba(255,255,255,0.15)"/>
+  <polygon points="50,95 58,87 58,80 42,80 42,87" fill="rgba(255,255,255,0.35)"/>
+</svg></div>
+                <div class="situation-info"><div class="sit-item"><span class="sit-label">At Bat</span><span class="sit-name">Luis García Jr.</span></div><div class="sit-item"><span class="sit-label">Pitching</span><span class="sit-name">Fernando Cruz</span></div></div>
+            </div>
+        <div class="game-location">🏠 Nationals Park</div></div>
+<div id="card-NYM" class="game-card" style="display:none">
+        <div class="game-card-header">
+            <span class="game-card-title">NYM — Today's Game</span>
+            <span class="badge badge-live">LIVE</span>
+        </div>
+        
+            <div class="score-row">
+                <span class="team-abbr">BOS</span>
+                <span class="score-num score-opp">6</span>
+                <span class="score-dash">–</span>
+                <span class="score-num score-featured">1</span>
+                <span class="team-abbr">NYM</span>
+            </div>
+            <div class="inning-info">Top 9</div>
+            <div class="count-row">
+                <div class="count-group"><span class="count-label">B</span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span></div>
+                <div class="count-group"><span class="count-label">S</span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span></div>
+                <div class="count-group"><span class="count-label">O</span><span class="count-dot dot-out"></span><span class="count-dot dot-out"></span><span class="count-dot dot-empty"></span></div>
+            </div>
+            <div class="situation-row">
+                <div class="diamond-wrap"><svg viewBox="0 0 100 100" width="72" height="72" aria-hidden="true">
+  <polygon points="50,12 88,50 50,88 12,50" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+  <rect x="43" y="5"  width="14" height="14" rx="2" transform="rotate(45,50,12)" fill="#E8A020"/>
+  <rect x="81" y="43" width="14" height="14" rx="2" transform="rotate(45,88,50)" fill="#E8A020"/>
+  <rect x="5"  y="43" width="14" height="14" rx="2" transform="rotate(45,12,50)" fill="#E8A020"/>
+  <polygon points="50,95 58,87 58,80 42,80 42,87" fill="rgba(255,255,255,0.35)"/>
+</svg></div>
+                <div class="situation-info"><div class="sit-item"><span class="sit-label">At Bat</span><span class="sit-name">Connor Wong</span></div><div class="sit-item"><span class="sit-label">Pitching</span><span class="sit-name">Xzavion Curry</span></div></div>
+            </div>
+        <div class="game-location">🏠 Citi Field</div></div>
+
+            </div>
             
-        
-        <div class="game-location">✈️ Busch Stadium</div>
-    </div>
-    
-        
     <div class="section">
-        <h2 class="section-title">🏆 NL East Standings</h2>
+        <h2 class="section-title">🏆 NL East Standings <span class="standings-hint">tap a team to see their game</span></h2>
         <div class="table-wrap">
             <table class="standings-table">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th class="team-name">Team</th>
-                        <th>W</th>
-                        <th>L</th>
-                        <th>PCT</th>
-                        <th>GB</th>
-                        <th>L10</th>
-                        <th>Streak</th>
+                        <th>#</th><th class="team-name">Team</th>
+                        <th>W</th><th>L</th><th>PCT</th><th>GB</th><th>L10</th><th>Streak</th>
                     </tr>
                 </thead>
                 <tbody>
-        <tr class="standings-braves">
+        <tr class="standings-braves" data-team="ATL" tabindex="0" role="button" aria-label="View Atlanta Braves game">
             <td class="rank">1</td>
             <td class="team-name">Atlanta Braves</td>
             <td>54</td>
@@ -335,8 +299,7 @@
             <td>5-5</td>
             <td>W2</td>
         </tr>
-        
-        <tr class="">
+        <tr class="" data-team="PHI" tabindex="0" role="button" aria-label="View Philadelphia Phillies game">
             <td class="rank">2</td>
             <td class="team-name">Philadelphia Phillies</td>
             <td>52</td>
@@ -346,8 +309,7 @@
             <td>5-5</td>
             <td>L1</td>
         </tr>
-        
-        <tr class="">
+        <tr class="" data-team="MIA" tabindex="0" role="button" aria-label="View Miami Marlins game">
             <td class="rank">3</td>
             <td class="team-name">Miami Marlins</td>
             <td>52</td>
@@ -357,8 +319,7 @@
             <td>7-3</td>
             <td>L1</td>
         </tr>
-        
-        <tr class="">
+        <tr class="" data-team="WSH" tabindex="0" role="button" aria-label="View Washington Nationals game">
             <td class="rank">4</td>
             <td class="team-name">Washington Nationals</td>
             <td>48</td>
@@ -368,8 +329,7 @@
             <td>6-4</td>
             <td>W1</td>
         </tr>
-        
-        <tr class="">
+        <tr class="" data-team="NYM" tabindex="0" role="button" aria-label="View New York Mets game">
             <td class="rank">5</td>
             <td class="team-name">New York Mets</td>
             <td>40</td>
@@ -378,26 +338,18 @@
             <td>15.0</td>
             <td>5-5</td>
             <td>W2</td>
-        </tr>
-        </tbody>
+        </tr></tbody>
             </table>
         </div>
     </div>
-    
-        
+            
     <div class="section">
         <h2 class="section-title">📋 Recent Games</h2>
         <div class="table-wrap">
             <table class="standings-table">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Opponent</th>
-                        <th>Score</th>
-                        <th>Result</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
+                <thead><tr>
+                    <th>Date</th><th>Opponent</th><th>Score</th><th>Result</th><th>Status</th>
+                </tr></thead>
                 <tbody>
         <tr>
             <td class="game-date">2026-07-10</td>
@@ -406,7 +358,6 @@
             <td><span class="badge badge-live">LIVE</span></td>
             <td class="game-state-label">Delayed</td>
         </tr>
-        
         <tr>
             <td class="game-date">2026-07-09</td>
             <td>@ Pittsburgh Pirates</td>
@@ -414,7 +365,6 @@
             <td><span class="badge result-win">W</span></td>
             <td class="game-state-label">Final</td>
         </tr>
-        
         <tr>
             <td class="game-date">2026-07-08</td>
             <td>@ Pittsburgh Pirates</td>
@@ -422,7 +372,6 @@
             <td><span class="badge result-win">W</span></td>
             <td class="game-state-label">Final</td>
         </tr>
-        
         <tr>
             <td class="game-date">2026-07-07</td>
             <td>@ Pittsburgh Pirates</td>
@@ -430,7 +379,6 @@
             <td><span class="badge result-loss">L</span></td>
             <td class="game-state-label">Final</td>
         </tr>
-        
         <tr>
             <td class="game-date">2026-07-06</td>
             <td>vs New York Mets</td>
@@ -438,20 +386,318 @@
             <td><span class="badge result-loss">L</span></td>
             <td class="game-state-label">Final</td>
         </tr>
-        
         <tr>
             <td class="game-date">2026-07-05</td>
             <td>vs New York Mets</td>
             <td class="score-cell">9–10</td>
             <td><span class="badge result-loss">L</span></td>
             <td class="game-state-label">Final</td>
-        </tr>
-        </tbody>
+        </tr></tbody>
             </table>
         </div>
     </div>
-    
+        </div>
+        <div id="tab-roster" class="tab-panel">
+            
+    <div class="roster-section">
+        <h2 class="roster-title">🏏 Hitters</h2>
+        <div class="table-wrap">
+            <table class="roster-table">
+                <thead><tr>
+                    <th class="player-name">Player</th><th>Pos</th>
+                    <th>AVG</th><th>HR</th><th>RBI</th><th>R</th><th>OPS</th><th>SB</th>
+                </tr></thead>
+                <tbody>
+        <tr>
+            <td class="player-name">Matt Olson</td>
+            <td class="pos-badge-cell"><span class="pos-badge">1B</span></td>
+            <td class="stat-num">.269</td>
+            <td class="stat-num">25</td>
+            <td class="stat-num">58</td>
+            <td class="stat-num">64</td>
+            <td class="stat-num">.886</td>
+            <td class="stat-num">2</td>
+        </tr>
+        <tr>
+            <td class="player-name">Michael Harris II</td>
+            <td class="pos-badge-cell"><span class="pos-badge">CF</span></td>
+            <td class="stat-num">.302</td>
+            <td class="stat-num">16</td>
+            <td class="stat-num">53</td>
+            <td class="stat-num">45</td>
+            <td class="stat-num">.833</td>
+            <td class="stat-num">6</td>
+        </tr>
+        <tr>
+            <td class="player-name">Jim Jarvis</td>
+            <td class="pos-badge-cell"><span class="pos-badge">SS</span></td>
+            <td class="stat-num">.320</td>
+            <td class="stat-num">1</td>
+            <td class="stat-num">3</td>
+            <td class="stat-num">1</td>
+            <td class="stat-num">.826</td>
+            <td class="stat-num">0</td>
+        </tr>
+        <tr>
+            <td class="player-name">Drake Baldwin</td>
+            <td class="pos-badge-cell"><span class="pos-badge">C</span></td>
+            <td class="stat-num">.256</td>
+            <td class="stat-num">15</td>
+            <td class="stat-num">45</td>
+            <td class="stat-num">49</td>
+            <td class="stat-num">.786</td>
+            <td class="stat-num">1</td>
+        </tr>
+        <tr>
+            <td class="player-name">Ozzie Albies</td>
+            <td class="pos-badge-cell"><span class="pos-badge">2B</span></td>
+            <td class="stat-num">.272</td>
+            <td class="stat-num">14</td>
+            <td class="stat-num">51</td>
+            <td class="stat-num">60</td>
+            <td class="stat-num">.767</td>
+            <td class="stat-num">1</td>
+        </tr>
+        <tr>
+            <td class="player-name">Mauricio Dubón</td>
+            <td class="pos-badge-cell"><span class="pos-badge">LF</span></td>
+            <td class="stat-num">.272</td>
+            <td class="stat-num">9</td>
+            <td class="stat-num">50</td>
+            <td class="stat-num">41</td>
+            <td class="stat-num">.750</td>
+            <td class="stat-num">2</td>
+        </tr>
+        <tr>
+            <td class="player-name">Dominic Smith</td>
+            <td class="pos-badge-cell"><span class="pos-badge">DH</span></td>
+            <td class="stat-num">.267</td>
+            <td class="stat-num">6</td>
+            <td class="stat-num">35</td>
+            <td class="stat-num">31</td>
+            <td class="stat-num">.706</td>
+            <td class="stat-num">0</td>
+        </tr>
+        <tr>
+            <td class="player-name">Joey Bart</td>
+            <td class="pos-badge-cell"><span class="pos-badge">C</span></td>
+            <td class="stat-num">.229</td>
+            <td class="stat-num">4</td>
+            <td class="stat-num">12</td>
+            <td class="stat-num">12</td>
+            <td class="stat-num">.684</td>
+            <td class="stat-num">0</td>
+        </tr>
+        <tr>
+            <td class="player-name">Mike Yastrzemski</td>
+            <td class="pos-badge-cell"><span class="pos-badge">LF</span></td>
+            <td class="stat-num">.228</td>
+            <td class="stat-num">6</td>
+            <td class="stat-num">28</td>
+            <td class="stat-num">33</td>
+            <td class="stat-num">.679</td>
+            <td class="stat-num">1</td>
+        </tr>
+        <tr>
+            <td class="player-name">Jorge Mateo</td>
+            <td class="pos-badge-cell"><span class="pos-badge">SS</span></td>
+            <td class="stat-num">.242</td>
+            <td class="stat-num">4</td>
+            <td class="stat-num">11</td>
+            <td class="stat-num">27</td>
+            <td class="stat-num">.667</td>
+            <td class="stat-num">9</td>
+        </tr>
+        <tr>
+            <td class="player-name">Eli White</td>
+            <td class="pos-badge-cell"><span class="pos-badge">RF</span></td>
+            <td class="stat-num">.218</td>
+            <td class="stat-num">4</td>
+            <td class="stat-num">15</td>
+            <td class="stat-num">15</td>
+            <td class="stat-num">.651</td>
+            <td class="stat-num">4</td>
+        </tr>
+        <tr>
+            <td class="player-name">Austin Riley</td>
+            <td class="pos-badge-cell"><span class="pos-badge">3B</span></td>
+            <td class="stat-num">.206</td>
+            <td class="stat-num">9</td>
+            <td class="stat-num">41</td>
+            <td class="stat-num">37</td>
+            <td class="stat-num">.614</td>
+            <td class="stat-num">5</td>
+        </tr>
+        <tr>
+            <td class="player-name">Kyle Farmer</td>
+            <td class="pos-badge-cell"><span class="pos-badge">DH</span></td>
+            <td class="stat-num">.267</td>
+            <td class="stat-num">0</td>
+            <td class="stat-num">3</td>
+            <td class="stat-num">2</td>
+            <td class="stat-num">.583</td>
+            <td class="stat-num">0</td>
+        </tr></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="roster-section">
+        <h2 class="roster-title">⚾ Pitchers</h2>
+        <div class="table-wrap">
+            <table class="roster-table">
+                <thead><tr>
+                    <th class="player-name">Player</th>
+                    <th>ERA</th><th>W-L</th><th>IP</th><th>K</th><th>BB</th><th>WHIP</th>
+                </tr></thead>
+                <tbody>
+        <tr>
+            <td class="player-name">Danny Young</td>
+            <td class="stat-num era">0.00</td>
+            <td class="stat-num">0-0</td>
+            <td class="stat-num">2.1</td>
+            <td class="stat-num">2</td>
+            <td class="stat-num">1</td>
+            <td class="stat-num">0.86</td>
+        </tr>
+        <tr>
+            <td class="player-name">Victor Mederos</td>
+            <td class="stat-num era">0.00</td>
+            <td class="stat-num">0-0</td>
+            <td class="stat-num">3.0</td>
+            <td class="stat-num">2</td>
+            <td class="stat-num">1</td>
+            <td class="stat-num">0.67</td>
+        </tr>
+        <tr>
+            <td class="player-name">Dylan Lee</td>
+            <td class="stat-num era">1.52</td>
+            <td class="stat-num">4-0</td>
+            <td class="stat-num">41.1</td>
+            <td class="stat-num">51</td>
+            <td class="stat-num">7</td>
+            <td class="stat-num">0.68</td>
+        </tr>
+        <tr>
+            <td class="player-name">James Karinchak</td>
+            <td class="stat-num era">1.86</td>
+            <td class="stat-num">0-0</td>
+            <td class="stat-num">9.2</td>
+            <td class="stat-num">8</td>
+            <td class="stat-num">5</td>
+            <td class="stat-num">0.93</td>
+        </tr>
+        <tr>
+            <td class="player-name">Dylan Dodd</td>
+            <td class="stat-num era">2.08</td>
+            <td class="stat-num">2-0</td>
+            <td class="stat-num">26.0</td>
+            <td class="stat-num">27</td>
+            <td class="stat-num">8</td>
+            <td class="stat-num">0.77</td>
+        </tr>
+        <tr>
+            <td class="player-name">Chris Sale</td>
+            <td class="stat-num era">2.20</td>
+            <td class="stat-num">9-6</td>
+            <td class="stat-num">98.0</td>
+            <td class="stat-num">117</td>
+            <td class="stat-num">25</td>
+            <td class="stat-num">1.11</td>
+        </tr>
+        <tr>
+            <td class="player-name">Raisel Iglesias</td>
+            <td class="stat-num era">2.30</td>
+            <td class="stat-num">0-2</td>
+            <td class="stat-num">31.1</td>
+            <td class="stat-num">35</td>
+            <td class="stat-num">7</td>
+            <td class="stat-num">1.12</td>
+        </tr>
+        <tr>
+            <td class="player-name">Didier Fuentes</td>
+            <td class="stat-num era">2.52</td>
+            <td class="stat-num">4-0</td>
+            <td class="stat-num">35.2</td>
+            <td class="stat-num">40</td>
+            <td class="stat-num">11</td>
+            <td class="stat-num">1.15</td>
+        </tr>
+        <tr>
+            <td class="player-name">Reynaldo López</td>
+            <td class="stat-num era">3.18</td>
+            <td class="stat-num">4-1</td>
+            <td class="stat-num">56.2</td>
+            <td class="stat-num">51</td>
+            <td class="stat-num">24</td>
+            <td class="stat-num">1.27</td>
+        </tr>
+        <tr>
+            <td class="player-name">Grant Holmes</td>
+            <td class="stat-num era">3.61</td>
+            <td class="stat-num">5-4</td>
+            <td class="stat-num">87.1</td>
+            <td class="stat-num">76</td>
+            <td class="stat-num">39</td>
+            <td class="stat-num">1.32</td>
+        </tr>
+        <tr>
+            <td class="player-name">Tyler Kinley</td>
+            <td class="stat-num era">3.62</td>
+            <td class="stat-num">4-3</td>
+            <td class="stat-num">32.1</td>
+            <td class="stat-num">33</td>
+            <td class="stat-num">12</td>
+            <td class="stat-num">1.21</td>
+        </tr>
+        <tr>
+            <td class="player-name">Bryce Elder</td>
+            <td class="stat-num era">4.12</td>
+            <td class="stat-num">5-6</td>
+            <td class="stat-num">102.2</td>
+            <td class="stat-num">86</td>
+            <td class="stat-num">32</td>
+            <td class="stat-num">1.25</td>
+        </tr>
+        <tr>
+            <td class="player-name">JR Ritchie</td>
+            <td class="stat-num era">4.60</td>
+            <td class="stat-num">1-2</td>
+            <td class="stat-num">45.0</td>
+            <td class="stat-num">42</td>
+            <td class="stat-num">28</td>
+            <td class="stat-num">1.47</td>
+        </tr></tbody>
+            </table>
+        </div>
+    </div>
+        </div>
     </main>
-    <footer>Last updated: July 10, 2026 at 10:33 PM &nbsp;·&nbsp; Data via MLB Stats API</footer>
+    <footer>Last updated: July 10, 2026 at 10:48 PM &nbsp;·&nbsp; Data via MLB Stats API</footer>
+    <script>
+        function showTab(name, btn) {
+            document.querySelectorAll('.tab-panel').forEach(function(el) { el.classList.remove('active'); });
+            document.getElementById('tab-' + name).classList.add('active');
+            document.querySelectorAll('.tab-btn').forEach(function(el) { el.classList.remove('active'); });
+            btn.classList.add('active');
+        }
+    </script>
+    <script>
+        function showTeam(abbr) {
+            document.querySelectorAll('#game-cards .game-card').forEach(el => el.style.display = 'none');
+            var card = document.getElementById('card-' + abbr);
+            if (card) card.style.display = 'block';
+            document.querySelectorAll('tr[data-team]').forEach(el => el.classList.remove('standings-active'));
+            var row = document.querySelector('tr[data-team="' + abbr + '"]');
+            if (row) row.classList.add('standings-active');
+        }
+        // Mark ATL as active on load
+        var atlRow = document.querySelector('tr[data-team="ATL"]');
+        if (atlRow) atlRow.classList.add('standings-active');
+        // Wire up clicks
+        document.querySelectorAll('tr[data-team]').forEach(function(tr) {
+            tr.addEventListener('click', function() { showTeam(tr.dataset.team); });
+            tr.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') showTeam(tr.dataset.team); });
+        });
+    </script>
 </body>
 </html>
