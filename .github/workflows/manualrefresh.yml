@@ -1,0 +1,38 @@
+name: Refresh Braves Score
+
+on:
+  schedule:
+    # Every 5 minutes, April through October (baseball season), all hours.
+    # GitHub Actions minimum interval is 5 minutes.
+    - cron: '*/5 * * 4-10 *'
+  workflow_dispatch: # also allows a manual "Run workflow" button in GitHub UI
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # needed so the job can push index.html back to the repo
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install python-mlb-statsapi
+
+      - name: Generate index.html
+        run: python3 generate.py
+
+      - name: Commit and push if data changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          # Only commit when index.html actually changed; --quiet exits 0 if no diff.
+          git diff --staged --quiet || git commit -m "chore: refresh score data [skip ci]"
+          git push
