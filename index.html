@@ -175,7 +175,7 @@
 <div id="card-PHI" class="game-card" style="display:none">
         <div class="game-card-header">
             <span class="game-card-title">PHI — Today's Game</span>
-            <span class="badge badge-live">LIVE <span class="badge badge-delay">Rain Delay</span></span>
+            <span class="badge result-win">W</span>
         </div>
         
             <div class="score-row">
@@ -185,22 +185,7 @@
                 <span class="score-num score-opp">0</span>
                 <span class="team-abbr">BAL</span>
             </div>
-            <div class="inning-info">Bottom 6</div>
-            <div class="count-row">
-                <div class="count-group"><span class="count-label">B</span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span></div>
-                <div class="count-group"><span class="count-label">S</span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span></div>
-                <div class="count-group"><span class="count-label">O</span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span><span class="count-dot dot-empty"></span></div>
-            </div>
-            <div class="situation-row">
-                <div class="diamond-wrap"><svg viewBox="0 0 100 100" width="72" height="72" aria-hidden="true">
-  <polygon points="50,12 88,50 50,88 12,50" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
-  <rect x="43" y="5"  width="14" height="14" rx="2" transform="rotate(45,50,12)" fill="rgba(255,255,255,0.15)"/>
-  <rect x="81" y="43" width="14" height="14" rx="2" transform="rotate(45,88,50)" fill="rgba(255,255,255,0.15)"/>
-  <rect x="5"  y="43" width="14" height="14" rx="2" transform="rotate(45,12,50)" fill="rgba(255,255,255,0.15)"/>
-  <polygon points="50,95 58,87 58,80 42,80 42,87" fill="rgba(255,255,255,0.35)"/>
-</svg></div>
-                <div class="situation-info"><div class="sit-item"><span class="sit-label">At Bat</span><span class="sit-name">Pete Alonso</span></div><div class="sit-item"><span class="sit-label">Pitching</span><span class="sit-name">Orion Kerkering</span></div></div>
-            </div>
+            <div class="game-detail">Final</div>
         <div class="game-location">✈️ Oriole Park at Camden Yards</div></div>
 <div id="card-MIA" class="game-card" style="display:none">
         <div class="game-card-header">
@@ -274,12 +259,12 @@
         <tr class="" data-team="PHI" tabindex="0" role="button" aria-label="View Philadelphia Phillies game">
             <td class="rank">2</td>
             <td class="team-name">Philadelphia Phillies</td>
-            <td>58</td>
+            <td>59</td>
             <td>53</td>
-            <td>.523</td>
-            <td>8.5</td>
-            <td>2-8</td>
-            <td>W1</td>
+            <td>.527</td>
+            <td>8.0</td>
+            <td>3-7</td>
+            <td>W2</td>
         </tr>
         <tr class="" data-team="MIA" tabindex="0" role="button" aria-label="View Miami Marlins game">
             <td class="rank">3</td>
@@ -772,7 +757,7 @@
 </div>
         </div>
     </main>
-    <footer>Last updated: August 02, 2026 at 9:42 PM &nbsp;·&nbsp; Data via MLB Stats API</footer>
+    <footer>Last updated: August 02, 2026 at 10:40 PM &nbsp;·&nbsp; Data via MLB Stats API</footer>
     <script>
         function showTab(name, btn) {
             document.querySelectorAll('.tab-panel').forEach(function(el) { el.classList.remove('active'); });
@@ -838,7 +823,7 @@
     <script>
         // Auto-reload: every 60s when a game is live, every 5 min otherwise.
         // has_live_game is baked in by generate.py at build time.
-        var hasLiveGame = true;
+        var hasLiveGame = false;
         setTimeout(function() { location.reload(); }, hasLiveGame ? 60000 : 300000);
     </script>
 </body>
